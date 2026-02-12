@@ -18,7 +18,7 @@
         <host>localhost</host>
         <port>3306</port>
         <user>root</user>
-        <password>1353914278</password>
+        <password></password>
         <name>sewagewatch</name>
     </database>
     
