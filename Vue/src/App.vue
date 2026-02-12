@@ -2,6 +2,14 @@
   <div class="app-container">
     <router-view />
   </div>
+  <div id="app">
+    <!-- 原有内容 -->
+    
+    <!-- 添加AI聊天组件 -->
+    <div style="position: fixed; right: 20px; bottom: 20px; z-index: 1000;">
+      <AiChatWidget />
+    </div>
+  </div>
 </template>
 
 <style>
@@ -60,3 +68,14 @@ h2 {
   color: var(--el-text-color-primary);
 }
 </style>
+
+<script>
+import AiChatWidget from '@/components/AiChatWidget.vue'
+
+export default {
+  components: {
+    AiChatWidget
+  },
+  // ... 其他代码
+}
+</script>
