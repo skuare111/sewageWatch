@@ -1,10 +1,13 @@
 spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
   application:
     name: spring-boot-demo-redis-cluster
   datasource:
     url: jdbc:mysql://localhost:3306/sewagewatch
     username: root
-    password: 1353914278
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 # --配置Mybatis执行的SQL语句日志输出到控制台
@@ -16,3 +19,15 @@ mybatis:
 jwt:
   secret: ewAiADkAOgA8ADcAWQBbAF0AXwBjAGUAaQBwAHMAfQB/AIEAhwCJAI0AkwCVAJcAmQCbAJ0AnwChAKMApQCnAKkAqwCtAK8AsQCzALUAtwC5ALsAvQC/AMEAwwDFAMcAyQDLAM0AzwDRANMA1QDXANkA2wDdAN8A4QDjAOUA5wDpAOsA7QDvAPEA8wD1APcA+QD7AP0A/w==
   expiration: 86400000
+server:
+  port: 8080
+  error:
+    include-stacktrace: always
+ai:
+  deepseek:
+    enabled: true
+    api-key: sk-0055fd0a3dc3465d822b7ca31ad989b2
+    base-url: https://api.deepseek.com/v1/chat/completions  
+    model: deepseek-chat
+    temperature: 0.7
+    max-tokens: 2000
