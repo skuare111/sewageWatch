@@ -28,25 +28,28 @@
     </scm>
     <properties>
         <java.version>17</java.version>
-        <!-- 显式指定编译器版本 -->
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler.release>${java.version}</maven.compiler.release>
-
-        <!-- 打包文件名称 -->
         <final.build.name>sewage-watch</final.build.name>
+        
+        <!-- 明确指定Lombok版本 -->
+        <lombok.version>1.18.38</lombok.version>
     </properties>
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        
+        <!-- Lombok依赖，明确指定版本和scope -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -62,7 +65,7 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>3.0.3</version>
         </dependency>
-        <dependency>   <!-- 分页插件 PageHelper -->
+        <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.4.7</version>
@@ -78,32 +81,30 @@
         </dependency>
     </dependencies>
 
-
     <build>
-        <!-- 自定义打包文件名 -->
         <finalName>${final.build.name}</finalName>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
-
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <release>${java.version}</release>
+                    <!-- 强制启用注解处理 -->
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.38</version>
+                            <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
+                    <!-- 强制启用参数名称编译 -->
+                    <parameters>true</parameters>
                 </configuration>
             </plugin>
 
-            <!-- ★★★ 核心：添加Spring Boot打包插件 ★★★ -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -115,13 +116,15 @@
                         </goals>
                     </execution>
                 </executions>
-<!--                <configuration>-->
-<!--                    <excludes>-->
-                        <!-- 排除文件 -->
-<!--                    </excludes>-->
-<!--                </configuration>-->
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
